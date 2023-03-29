@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Home - TicketShow
+{% endblock %}
+
+{% block content %}
+    <h1 class="display-1">Current Shows</h1>
+    <h2 class="text-muted">Welcome @{{current_user.username}}</h2>
+    <a href="{{url_for('add_post')}}" class="btn btn-primary">
+        <i class="fas fa-plus"></i>
+        Upload Blog
+    </a>
+    <hr>
+    <h1>Blogs:</h1>
+    {% if posts | length %}
+        <div class="cards d-flex align-items-center flex-column">
+        {% for post in posts %}
+            {% include "post/card.html" %}
+        {% endfor %}
+        </div>
+    {% else %}
+        <h2 class="text-center mt-5">No shows yet :(</h2>
+    {% endif %}
+
+{% endblock content %}
+
+{% block style %}
+    <link rel="stylesheet" href="{{url_for('static', filename='css/cards.css')}}">
+{% endblock %}

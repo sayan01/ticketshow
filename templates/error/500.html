@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Error 500 - Internal Server Error
+{% endblock title %}
+
+{% block content %}
+    <h1>500 Internal Server Error</h1>
+    <h3>Details:</h3>
+    <div class="error">
+        {{error}}
+    </div>
+{% endblock content %}
