@@ -1,0 +1,38 @@
+<!-- {{venue.name}}
+<br>
+{{venue.address}}
+<br>
+{{venue.city}}
+<br>
+{{venue.capacity}} -->
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">{{venue.name}}</h4>
+        <p class="card-text">{{venue.address}} - {{venue.city}}</p>
+        <p class="card-text">{{venue.capacity}} seats</p>
+        <a href="" class="btn btn-primary">
+            <i class="fas fa-plus    "></i>
+            Add a show
+        </a>
+        <a href="" class="btn btn-primary">
+            <i class="fas fa-edit    "></i>
+            Edit venue
+        </a>
+        <hr>
+        {% if venue.shows | length %}
+            <div class="shows">
+                <h5>Shows:</h5>
+                <ul>
+                    {% for show in venue.shows %}
+                        <li>
+                            <a href="">{{show.name}}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% else %}
+            <h5 class="text-center">No shows yet :(</h5>
+        {% endif %}
+    </div>
+</div>

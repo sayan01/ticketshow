@@ -1,0 +1,14 @@
+
+{% extends "components/layout.html" %}
+
+{% block title %}
+    Error {{error_code}} - {{error_title}}
+{% endblock title %}
+
+{% block content %}
+    <h1>Error {{error_code}} - {{error_title}}</h1>
+    <h3>Details:</h3>
+    <div class="error">
+        {{error_message | safe}}
+    </div>
+{% endblock content %}

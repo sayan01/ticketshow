@@ -1,6 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
-from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import UserMixin
 from app import app
@@ -23,6 +22,7 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(64), unique=True, nullable=False)
     password_hash = db.Column(db.String(128), nullable=False)
     name = db.Column(db.String(128), nullable=False)
+    is_admin = db.Column(db.Boolean, nullable=False, default=False)
 
     def __repr__(self):
         return f'{self.username}'

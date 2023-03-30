@@ -1,4 +1,4 @@
-{% extends "layout.html" %}
+{% extends "components/layout.html" %}
 
 {% block title %}
     Home - TicketShow
@@ -7,12 +7,8 @@
 {% block content %}
     <h1 class="display-1">Current Shows</h1>
     <h2 class="text-muted">Welcome @{{current_user.username}}</h2>
-    <a href="{{url_for('add_post')}}" class="btn btn-primary">
-        <i class="fas fa-plus"></i>
-        Upload Blog
-    </a>
     <hr>
-    <h1>Blogs:</h1>
+    <h1>Shows:</h1>
     {% if posts | length %}
         <div class="cards d-flex align-items-center flex-column">
         {% for post in posts %}

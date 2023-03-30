@@ -9,4 +9,6 @@ login_manager.refresh_view = 'login' # type: ignore
 
 @login_manager.user_loader
 def load_user(user_id):
-    return User.query.get_or_404(int(user_id))
+    print(user_id)
+    user = User.query.get(int(user_id))
+    return user

@@ -1,5 +1,5 @@
 {% macro nav_link(endpoint, text) %}
-  <a href=" nav-link {% if request.path == url_for(endpoint) %}active{% endif %}" href="{{url_for(endpoint)}}">{{text}}</a>
+  <a class=" nav-link {% if request.path == url_for(endpoint) %}active{% endif %}" href="{{url_for(endpoint)}}">{{text}}</a>
 {% endmacro %}
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
   <div class="container-fluid">
@@ -10,14 +10,17 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
         {% if current_user.is_authenticated %}
-          {{ nav_link('home', 'Home') }}
-          {{ nav_link('search', 'Search') }}
+          {% if current_user.is_admin %}
+            {{ nav_link('admin', 'Home') }}
+            {{ nav_link('admin_register', 'Register') }}
+          {% else %}
+            {{ nav_link('index', 'Home') }}
+          {% endif %}
           {{ nav_link('profile', 'Profile') }}
           {{ nav_link('logout', 'Logout') }}
         {% else %}
-          {{ nav_link('login', 'User Login') }}
-          {{ nav_link('register', 'User Register') }}
-          {{ nav_link('adminlogin', 'Admin Login') }}
+          {{ nav_link('login', 'Login') }}
+          {{ nav_link('register', 'Register') }}
         {% endif %}
       </div>
     </div>
