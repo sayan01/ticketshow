@@ -2,6 +2,7 @@
 .env
 bin
 static/uploads
+csv
 migrations
 instance
 *.pdf
