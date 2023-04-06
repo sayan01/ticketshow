@@ -10,8 +10,10 @@
     {% include 'components/show/card.html'   %}
     <form action="" method="POST">
         {{ form.hidden_tag() }}
-        {{form.seats.label(class="form-label")}}
-        {{form.seats(class="form-control", id="quantity")}}
+        <div class="input-group">
+            {{form.seats.label(class="input-group-text")}}
+            {{form.seats(class="form-control", id="quantity")}}
+        </div>
         <hr>
         <p>
             <strong>Price per ticket:</strong>

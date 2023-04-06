@@ -1,0 +1,58 @@
+{% extends 'components/layout.html' %}
+
+{% block content %}
+    <h1>Bookings</h1>
+    <table class="bookings">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Show Date</th>
+                <th>Show Time</th>
+                <th>Booking Time</th>
+                <th>Seats</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for booking in user.bookings %}
+                {% include 'components/booking/tr.html' %}
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block style %}
+
+<style>
+    .bookings {
+        width: 100%;
+    }
+    .bookings thead {
+        background-color: #f5f5f5;
+    }
+    .bookings tbody > tr{
+        border-bottom: 1px solid #e5e5e5;
+        transition : all 0.1s ease;
+    }
+    .bookings th {
+        padding: 10px;
+        text-align: left;
+    }
+    .bookings td {
+        padding: 10px;
+    }
+    .bookings tr:nth-child(even) {
+        background-color: #f5f5f5;
+    }
+    .bookings tbody > tr:hover{
+        background-color: #e5e5e5;
+        transform: scale(1.01);
+        cursor: pointer;
+    }
+</style>
+
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}

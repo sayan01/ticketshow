@@ -74,3 +74,8 @@ def cancel_show(show_id: int):
         flash('Booking cancelled')
         return redirect(url_for('index'))
     return render_template('show/cancel.html', show=show, booking=booking)
+
+@app.route('/bookings')
+@login_required
+def bookings():
+    return render_template('bookings.html', user=current_user)

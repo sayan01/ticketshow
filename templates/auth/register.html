@@ -10,23 +10,23 @@
     <!-- Register Form -->
     <form action="" method="POST">
         {{ form.hidden_tag() }}
-        <div class="form-group">
-            {{form.username.label(class="col-form-label")}}
+        <div class="input-group mb-3">
+            {{form.username.label(class="input-group-text")}}
             {{ form.username(class="form-control") }}
         </div>
 
-        <div class="form-group">
-            {{form.password.label(class="col-form-label")}}
+        <div class="input-group mb-3">
+            {{form.password.label(class="input-group-text")}}
             {{ form.password(class="form-control") }}
         </div>
 
-        <div class="form-group">
-            {{form.confirm_password.label(class="col-form-label")}}
+        <div class="input-group mb-3">
+            {{form.confirm_password.label(class="input-group-text")}}
             {{ form.confirm_password(class="form-control") }}
         </div>
 
-        <div class="form-group">
-            {{ form.name.label(class="col-form-label") }}
+        <div class="input-group mb-3">
+            {{ form.name.label(class="input-group-text") }}
             {{ form.name(class="form-control") }}
         </div>
         <input type="submit" class="btn btn-primary" value="Register">

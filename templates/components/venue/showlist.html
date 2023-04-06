@@ -1,5 +1,4 @@
 {% if venue.shows | length %}
-    <div class="shows d-flex flex-column align-items-center justify-content-center">
         {% for show in venue.shows | sort(attribute='start_time', reverse=True) %}
             {% if not tags or tags|any_in(show.tags.split(',')) %}
                 {% if not rating or rating == 0 or rating == show.rating %}
@@ -7,7 +6,6 @@
                 {% endif %}
             {% endif %}
         {% endfor %}
-    </div>
 {% else %}
     <h5 class="text-center">No shows yet :&#40;</h5> <!-- :&#40; is the sad face emoji -->
 {% endif %}

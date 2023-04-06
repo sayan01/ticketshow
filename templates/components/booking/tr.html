@@ -1,0 +1,20 @@
+<tr class="booking">
+    <td class="booking__info__title">
+        <strong>{{ booking.show.name }}</strong>
+    </td>
+    <td class="booking__info__date">
+        {{ booking.show.start_time.strftime('%d %b') }}
+    </td>
+    <td class="booking__info__time">
+        {{ booking.show.start_time.strftime('%I:%M %p') }} - {{ booking.show.end_time.strftime('%I:%M %p') }}
+    </td>
+    <td class="booking__info__booking__time">
+        {{ booking.booking_time.strftime('%d %b %I:%M %p') }} 
+    </td>
+    <td class="booking__info__seats">
+        {{ booking.seats }}
+    </td>
+    <td class="booking__actions">
+        <a href="{{ url_for('cancel_show', show_id=booking.show.id) }}" class="btn btn-danger">Cancel</a>
+    </td>
+</tr>

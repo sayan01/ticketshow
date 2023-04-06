@@ -1,33 +1,33 @@
 {{ form.hidden_tag() }}
-<div class="form-group">
-    {{form.name.label(class="col-form-label")}}
+<div class="input-group mb-3">
+    {{form.name.label(class="input-group-text")}}
     {{ form.name(class="form-control", readonly=form_fields_readonly) }}
 </div>
-<div class="form-group">
-    {{ form.rating.label(class="col-form-label") }}
+<div class="input-group mb-3">
+    {{ form.rating.label(class="input-group-text") }}
     {{ form.rating(class="form-control", readonly=form_fields_readonly) }}
 </div>
-<div class="form-group">
-    {{ form.date.label(class="col-form-label") }}
+<div class="input-group mb-3">
+    {{ form.date.label(class="input-group-text") }}
     {{ form.date(class="form-control", readonly=form_fields_readonly) }}
 </div>
-<div class="form-group">
-    {{ form.start_time.label(class="col-form-label") }}
+<div class="input-group mb-3">
+    {{ form.start_time.label(class="input-group-text") }}
     {{ form.start_time(class="form-control", readonly=form_fields_readonly) }}
 </div>
-<div class="form-group">
-    {{ form.end_time.label(class="col-form-label") }}
+<div class="input-group mb-3">
+    {{ form.end_time.label(class="input-group-text") }}
     {{ form.end_time(class="form-control", readonly=form_fields_readonly) }}
 </div>
-<div class="form-group">
-    {{ form.tags.label(class="col-form-label") }}
+<div class="input-group mb-3">
+    {{ form.tags.label(class="input-group-text") }}
     {{ form.tags(class="form-control", style="text-transform: lowercase", readonly=form_fields_readonly) }}
 </div>
-<div class="form-group">
-    {{ form.ticket_price.label(class="col-form-label") }}
+<div class="input-group mb-3">
+    {{ form.ticket_price.label(class="input-group-text") }}
     {{ form.ticket_price(class="form-control", readonly=form_fields_readonly) }}
 </div>
-<div class="form-group">
-    {{ form.venue.label(class="col-form-label") }}
+<div class="input-group mb-3">
+    {{ form.venue.label(class="input-group-text") }}
     {{ form.venue(class="form-control", readonly=form_fields_readonly) }}
 </div>
