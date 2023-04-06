@@ -9,19 +9,21 @@
     <h1 class="display-1">Admin Panel</h1>
     <h2 class="text-muted">Welcome {{current_user.name}} <span class="text-muted small">(@{{current_user.username}})</span></h2>
     <hr>
-    <h1>Venues:</h1>
-    <h2 class="text-center mt-5"><a href="{{url_for('add_venue')}}" class="btn btn-primary">
-        <i class="fas fa-plus    "></i>
-        Add a venue
-    </a></h2>
+    <div class="header d-flex flex-row justify-content-between align-items-center">
+        <h1>Venues:</h1>
+        <a href="{{url_for('add_venue')}}" class="btn btn-primary">
+            <i class="fas fa-plus    "></i>
+            Add a venue
+        </a>
+    </div>
     {% if venues | length %}
-        <div class="cards d-flex align-items-center flex-column">
+        <div class="cards d-flex align-items-start flex-row gap-3 justify-content-start">
         {% for venue in venues %}
             {% include "components/venue/card.html" %}
         {% endfor %}
         </div>
     {% else %}
-        <h2 class="text-center mt-5">No venues yet :(</h2>
+        <h2 class="text-center mt-5">No venues yet :&#40;</h2> <!-- :&#40; is the sad face emoji -->
     {% endif %}
 
 {% endblock content %}

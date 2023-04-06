@@ -16,7 +16,7 @@ from models import *
 import auth
 
 # Init routes
-from routes import *
+import routes
 
 if __name__ == '__main__':
     app.run()

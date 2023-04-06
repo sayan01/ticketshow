@@ -1,0 +1,9 @@
+{% if venue.shows | length %}
+    <div class="shows d-flex flex-column align-items-center justify-content-center">
+        {% for show in venue.shows %}
+        {% include "components/show/card.html" %}
+        {% endfor %}
+    </div>
+{% else %}
+    <h5 class="text-center">No shows yet :&#40;</h5> <!-- :&#40; is the sad face emoji -->
+{% endif %}

@@ -1,38 +1,30 @@
-<!-- {{venue.name}}
-<br>
-{{venue.address}}
-<br>
-{{venue.city}}
-<br>
-{{venue.capacity}} -->
-
 <div class="card">
     <div class="card-body">
-        <h4 class="card-title">{{venue.name}}</h4>
+        <h3 class="card-title">{{venue.name}}</h3>
         <p class="card-text">{{venue.address}} - {{venue.city}}</p>
         <p class="card-text">{{venue.capacity}} seats</p>
-        <a href="" class="btn btn-primary">
-            <i class="fas fa-plus    "></i>
-            Add a show
-        </a>
-        <a href="" class="btn btn-primary">
-            <i class="fas fa-edit    "></i>
-            Edit venue
-        </a>
-        <hr>
-        {% if venue.shows | length %}
-            <div class="shows">
-                <h5>Shows:</h5>
-                <ul>
-                    {% for show in venue.shows %}
-                        <li>
-                            <a href="">{{show.name}}</a>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
-        {% else %}
-            <h5 class="text-center">No shows yet :(</h5>
+        {% if admin %}
+        <div class="action-buttons d-flex flex-row justify-content-around">
+            <a href="{{ url_for('edit_venue', venue_id=venue.id) }}" class="btn btn-primary">
+                <i class="fas fa-edit    "></i>
+                Edit venue
+            </a>
+            <a href="{{url_for('delete_venue', venue_id=venue.id)}}" class="btn btn-outline-danger">
+                <i class="fas fa-trash    "></i>
+                Delete venue
+            </a>
+        </div>
         {% endif %}
+        <hr>
+        <div class="shows d-flex flex-column justify-content-around align-items-center my-2">
+            <h4>Shows: {{venue.shows | length }}</h4>
+            {% if admin %}
+            <a href="{{ url_for('add_show', venue_id=venue.id)}}" class="btn btn-outline-success">
+                <i class="fas fa-plus    "></i>
+                Add a show
+            </a>
+            {% endif %}
+            {% include 'components/venue/showlist.html'   %}
+        </div>
     </div>
 </div>

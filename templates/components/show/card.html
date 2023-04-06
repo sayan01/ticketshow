@@ -1,0 +1,43 @@
+<div class="card d-flex flex-column align-items-start my-2 p-3" style="width:100%">
+    <div class="text ">
+        <h5><strong>Name:</strong> {{show.name}}  </h5>
+        <p>
+            <strong>Time:</strong> {{show.start_time.strftime("%d %b")}}
+            ( {{show.start_time.strftime("%H:%M")}} - {{show.end_time.strftime("%H:%M")}} )
+        </p>
+        <p><strong>Rating:</strong> 
+            <span class="btn btn-{{ {1:'danger', 2:'warning', 3: 'warning', 4: 'success', 5:'success'}[show.rating] }}">
+                <i class="fas fa-star    "></i>
+                {{show.rating | int }}
+            </span>
+        </p>
+        <p><strong>Price:</strong>
+            Rs. {{ show.price }}
+        </p>
+        <p><strong>Tickets Sold:</strong> ({{show.bookings | length }}/{{show.venue.capacity}})</p>
+        <p>
+            <strong>Tags: </strong>
+            {% for tag in show.tags.split(',') %}
+                <span class="badge bg-secondary">{{tag}}</span>
+            {% endfor %}
+        </p>
+    </div>
+    <div class="action-buttons d-flex flex-row justify-content-center align-items-center gap-3">
+    {% if admin %}
+        <a href="{{url_for('edit_show', show_id=show.id)}}" class="btn btn-outline-primary">
+            <i class="fas fa-edit    "></i>
+            Edit show
+        </a>
+        <a href="{{url_for('delete_show', show_id=show.id)}}" class="btn btn-outline-danger">
+            <i class="fas fa-trash    "></i>
+            Delete show
+        </a>
+    {% else %}
+        <a href="{{url_for('book_show', show_id=show.id)}}" class="btn btn-outline-success">
+            <i class="fas fa-book    "></i>
+            Book show
+        </a>
+    {% endif %}
+    </div>
+
+</div>

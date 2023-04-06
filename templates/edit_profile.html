@@ -7,22 +7,11 @@
 {% block content %}
     <h1 class="display-1">{{ usertype }} Edit Profile</h1>
     <hr>
-    <!-- Register Form -->
     <form action="" method="POST">
         {{ form.hidden_tag() }}
         <div class="form-group">
             {{form.username.label(class="col-form-label")}}
             {{ form.username(class="form-control") }}
-        </div>
-
-        <div class="form-group">
-            {{form.password.label(class="col-form-label")}}
-            {{ form.password(class="form-control") }}
-        </div>
-
-        <div class="form-group">
-            {{form.confirm_password.label(class="col-form-label")}}
-            {{ form.confirm_password(class="form-control") }}
         </div>
 
         <div class="form-group">

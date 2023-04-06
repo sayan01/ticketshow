@@ -1,15 +1,16 @@
 {% extends 'components/layout.html' %}
 
 {% block title %}
-    Add Venue - TicketShow
+    Add Show - TicketShow
 {% endblock %}
 
 {% block content %}
-    <h1 class="display-1">Add Venue</h1>
+    <h1 class="display-1">Add Show</h1>
     <hr>
     <form action="" method="POST">
-        {% include "components/venue/form.html" %}
-        <input type="submit" class="btn btn-primary my-3" value="Add">
+        <h2>Are you sure you want to delete the venue with following details?</h2>
+        {% include "components/show/form.html" %}
+        <input type="submit" class="btn btn-primary my-3" value="Delete">
         <a class="btn btn-outline-danger" href="{{url_for('admin')}}">Cancel</a>
     </form>
 

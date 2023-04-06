@@ -1,0 +1,47 @@
+{% extends 'components/layout.html' %}
+
+{% block title %}
+    Book Show - TicketShow
+{% endblock %}
+
+{% block content %}
+    <h1 class="display-1">Book Show</h1>
+    <hr>
+    {% include 'components/show/card.html'   %}
+    <form action="" method="POST">
+        {{ form.hidden_tag() }}
+        {{form.seats.label(class="form-label")}}
+        {{form.seats(class="form-control", id="quantity")}}
+        <hr>
+        <p>
+            <strong>Price per ticket:</strong>
+            Rs.
+            <span id="price">{{show.price}}</span>
+        </p>
+        <p>
+            <strong>Total Price:</strong>
+            Rs.
+            <span id="total">{{show.price}}</span>
+        </p>
+        <input type="submit" class="btn btn-success my-3" value="Book">
+        <a class="btn btn-outline-danger" href="{{url_for('admin')}}">Cancel</a>
+    </form>
+
+{% endblock %}
+
+{% block style %}
+    
+{% endblock %}
+
+{% block script %}
+    <script>
+        const quantity = document.getElementById('quantity');
+        const total = document.getElementById('total');
+        const price = document.getElementById('price');
+        update = () => {
+            total.innerText = quantity.value * price.innerText;
+        }
+        quantity.addEventListener('change', update);
+        quantity.addEventListener('keyup', update);
+    </script>
+{% endblock %}

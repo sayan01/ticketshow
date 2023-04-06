@@ -4,5 +4,4 @@
 .cards > .card:hover{
     border-color: var(--bs-text-dark);
     transform: scale(1.05);
-    cursor: pointer;
 }

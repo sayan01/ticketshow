@@ -11,11 +11,6 @@ db.init_app(app)
 migrate = Migrate(app, db)
 
 # Creating Model
-show_genre_table = db.Table('show_genre',
-    db.Column('show_id', db.Integer, db.ForeignKey('show.id')),
-    db.Column('genre_id', db.Integer, db.ForeignKey('genre.id'))
-)
-
 class User(db.Model, UserMixin):
     __tablename__ = 'user'
     id = db.Column(db.Integer, primary_key=True)
@@ -23,6 +18,7 @@ class User(db.Model, UserMixin):
     password_hash = db.Column(db.String(128), nullable=False)
     name = db.Column(db.String(128), nullable=False)
     is_admin = db.Column(db.Boolean, nullable=False, default=False)
+    bookings = db.relationship('Booking', backref='user', lazy=True)
 
     def __repr__(self):
         return f'{self.username}'
@@ -55,15 +51,19 @@ class Show(db.Model):
     venue_id = db.Column(db.Integer, db.ForeignKey('venue.id'), nullable=False)
     name = db.Column(db.String(128), nullable=False)
     rating = db.Column(db.Float, nullable=False)
-    timing = db.Column(db.DateTime, nullable=False)
+    start_time = db.Column(db.DateTime, nullable=False)
+    end_time = db.Column(db.DateTime, nullable=False)
     price = db.Column(db.Float, nullable=False)
-    genres = db.relationship('Genre', secondary=show_genre_table, backref='shows', lazy=True)
-    __table_args__ = (db.UniqueConstraint('venue_id', 'timing'),)
+    tags = db.Column(db.String(256), nullable=False)
+    bookings = db.relationship('Booking', backref='show', lazy=True)
 
-class Genre(db.Model):
-    __tablename__ = 'genre'
+class Booking(db.Model):
+    __tablename__ = 'booking'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(128), nullable=False)
+    show_id = db.Column(db.Integer, db.ForeignKey('show.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    booking_time = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    seats = db.Column(db.Integer, nullable=False)
 
 with app.app_context():
     db.create_all()
