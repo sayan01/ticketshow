@@ -14,7 +14,7 @@
         <p><strong>Price:</strong>
             Rs. {{ show.price }}
         </p>
-        <p><strong>Tickets Sold:</strong> ({{show.bookings | length }}/{{show.venue.capacity}})</p>
+        <p><strong>Tickets Sold:</strong> ({{show.bookings | sum(attribute='seats') }}/{{show.venue.capacity}})</p>
         <p>
             <strong>Tags: </strong>
             {% for tag in show.tags.split(',') %}
@@ -33,10 +33,24 @@
             Delete show
         </a>
     {% else %}
-        <a href="{{url_for('book_show', show_id=show.id)}}" class="btn btn-outline-success">
-            <i class="fas fa-book    "></i>
-            Book show
-        </a>
+        {% if now and now < show.end_time %}
+            {% if show.venue.capacity == show.bookings | sum(attribute='seats') %}
+                <a href="#" class="btn btn-outline-info" style="pointer-events: none; cursor: default">
+                    <i class="fas fa-times    "></i>
+                    Sold out
+                </a>
+            {% else %}
+                <a href="{{url_for('book_show', show_id=show.id)}}" class="btn btn-outline-success">
+                    <i class="fas fa-book    "></i>
+                    Book show
+                </a>
+            {% endif %}
+        {% else %}
+            <a href="#" class="btn btn-outline-secondary" style="pointer-events: none; cursor: default">
+                <i class="fas fa-times    "></i>
+                Show ended
+            </a>
+        {% endif %}
     {% endif %}
     </div>
 

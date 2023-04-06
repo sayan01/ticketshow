@@ -4,17 +4,33 @@ from app import app
 from models import *
 from forms import *
 from error import flash_form_errors
+from datetime import datetime
 
 #------------------------------------------------------------------------------------
 # routes for user
 #------------------------------------------------------------------------------------
 
-@app.route('/')
+@app.route('/' , methods=['GET', 'POST'])
 @login_required
 def index():
     if current_user.is_admin:
         return redirect(url_for('admin'))
-    return render_template('index.html')
+    form = SearchForm()
+    if form.validate_on_submit():
+        venues = Venue.query.filter(Venue.city.ilike(f'%{form.location.data}%')).all() if form.location.data else Venue.query.all()
+        kwargs = {
+            'user': current_user,
+            'venues': venues,
+            'now': datetime.now(),
+            'tags': [tag.strip() for tag in form.tags.data.split(',')] if form.tags.data else None,
+            'rating': form.rating.data if form.rating.data else None,
+            'location': form.location.data if form.location.data else None,
+            'form': form,
+        }
+        return render_template('index.html', **kwargs)
+    elif request.method == 'POST':
+        flash_form_errors(form)
+    return render_template('index.html', user=current_user, venues=Venue.query.all(), now=datetime.now(), form=form)
 
 @app.route('/show/<int:show_id>/book', methods=['GET', 'POST'])
 @login_required
@@ -26,7 +42,7 @@ def book_show(show_id: int):
         if form.seats.data < 0:
             flash('Seats cannot be negative')
             return redirect(url_for('book_show', show_id=show_id))
-        if form.seats.data > show.venue.capacity - len(show.bookings):
+        if form.seats.data > show.venue.capacity - sum([booking.seats for booking in show.bookings]):
             flash('Not enough seats available')
             return redirect(url_for('book_show', show_id=show_id))
         # create booking

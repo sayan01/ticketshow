@@ -8,11 +8,36 @@
     <h1 class="display-1">Current Shows</h1>
     <h2 class="text-muted">Welcome @{{current_user.username}}</h2>
     <hr>
+    <div class="search">
+        <form action="" method="POST">
+            {{form.hidden_tag()}}
+            <div class="inline d-flex flex-row gap-2 align-items-center">
+                <span class="input-group mb-3">
+                    {{form.location.label(class="input-group-text")}}
+                    {{form.location(class="form-control")}}
+                </span>
+                <span class="input-group mb-3">
+                    {{form.tags.label(class="input-group-text")}}
+                    {{form.tags(class="form-control")}}
+                </span>
+                <span class="input-group mb-3">
+                    {{form.rating.label(class="input-group-text")}}
+                    {{form.rating(class="form-control")}}
+                </span>
+                <span class="mb-3">
+                    <input type="submit" class="btn btn-primary" value="Search">
+                </span>
+                <span class="mb-3">
+                    <a href="{{url_for('index')}}" class="btn btn-outline-danger">Clear</a>
+                </span>
+            </div>
+        </form>
+    </div>
     <h1>Shows:</h1>
-    {% if posts | length %}
-        <div class="cards d-flex align-items-center flex-column">
-        {% for post in posts %}
-            {% include "post/card.html" %}
+    {% if venues | length %}
+        <div class="cards d-flex flex-row align-items-start gap-3 justify-content-center ">
+        {% for venue in venues %}
+            {% include "components/venue/card.html" %}
         {% endfor %}
         </div>
     {% else %}

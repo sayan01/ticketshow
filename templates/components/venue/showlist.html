@@ -1,7 +1,11 @@
 {% if venue.shows | length %}
     <div class="shows d-flex flex-column align-items-center justify-content-center">
-        {% for show in venue.shows %}
-        {% include "components/show/card.html" %}
+        {% for show in venue.shows | sort(attribute='start_time', reverse=True) %}
+            {% if not tags or tags|any_in(show.tags.split(',')) %}
+                {% if not rating or rating == 0 or rating == show.rating %}
+                    {% include "components/show/card.html" %}
+                {% endif %}
+            {% endif %}
         {% endfor %}
     </div>
 {% else %}

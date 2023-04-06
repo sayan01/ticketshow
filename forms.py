@@ -1,8 +1,6 @@
-from flask_wtf import *
-from wtforms import *
-from wtforms.fields import *
-from wtforms.validators import *
-from wtforms.widgets import *
+from flask_wtf import FlaskForm
+from wtforms.fields import StringField, PasswordField, IntegerField, SelectField, DecimalField, DateField, TimeField
+from wtforms.validators import DataRequired, Length, EqualTo, NumberRange
 from datetime import date
 
 class LoginForm(FlaskForm):
@@ -43,9 +41,7 @@ class BookingForm(FlaskForm):
     seats = IntegerField('No. of Seats', validators=[DataRequired(), NumberRange(min=1)])
 
 
-class VenueSearchForm(FlaskForm):
-    location = StringField('Location', validators=[DataRequired(), Length(min=2, max=50)])
-
-class ShowSearchForm(FlaskForm):
-    tags = StringField('Tags', validators=[DataRequired(), Length(min=2, max=50)])
-    rating = SelectField('Rating', validators=[DataRequired()], choices=[1,2,3,4,5], coerce=int)
+class SearchForm(FlaskForm):
+    location = StringField('Location', validators=[])
+    tags = StringField('Tags', validators=[])
+    rating = SelectField('Rating', validators=[], choices=list(enumerate(['All', *range(1,6)])), coerce=int)
