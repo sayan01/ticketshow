@@ -13,6 +13,9 @@ def add_venue():
         abort(403, description="Access denied, you are not an admin")
     form = VenueForm()
     if form.validate_on_submit():
+        if form.capacity.data < 0:
+            flash('Capacity cannot be negative')
+            return redirect(url_for('add_venue'))
         venue = Venue(name=form.name.data, address=form.address.data, city=form.city.data.upper(), capacity=form.capacity.data)
         db.session.add(venue)
         db.session.commit()
@@ -31,6 +34,9 @@ def edit_venue(venue_id: int):
     venue = Venue.query.get_or_404(venue_id)
     form = VenueForm()
     if form.validate_on_submit():
+        if form.capacity.data < 0:
+            flash('Capacity cannot be negative')
+            return redirect(url_for('edit_venue', venue_id=venue_id))
         venue.name = form.name.data
         venue.address = form.address.data
         venue.city = form.city.data.upper()

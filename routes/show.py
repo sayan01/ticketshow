@@ -32,20 +32,16 @@ def add_show(venue_id: int):
             return redirect(url_for('add_show', venue_id=venue_id))
 
         # check if show already exists at this time
-        if Show.query.filter_by(venue_id=venue.id).filter(
-                Show.start_time <= start_time, Show.end_time >= start_time).first():
-            flash('Show already exists at this time')
-            return redirect(url_for('add_show', venue_id=venue_id))
-        if Show.query.filter_by(venue_id=venue.id).filter(
-                Show.start_time <= end_time, Show.end_time >= end_time).first():
-            flash('Show already exists at this time')
-            return redirect(url_for('add_show', venue_id=venue_id))
-        if Show.query.filter_by(venue_id=venue.id).filter(
-                Show.start_time >= start_time, Show.end_time <= end_time).first():
-            flash('Show already exists at this time')
-            return redirect(url_for('add_show', venue_id=venue_id))
-        if Show.query.filter_by(venue_id=venue.id).filter(
-                Show.start_time <= start_time, Show.end_time >= end_time).first():
+        c1 = Show.query.filter_by(venue_id=venue.id).filter(
+            Show.start_time <= start_time, Show.end_time >= start_time).first()
+        c2 = Show.query.filter_by(venue_id=venue.id).filter(
+            Show.start_time <= end_time, Show.end_time >= end_time).first()
+        c3 = Show.query.filter_by(venue_id=venue.id).filter(
+            Show.start_time >= start_time, Show.end_time <= end_time).first()
+        c4 = Show.query.filter_by(venue_id=venue.id).filter(
+            Show.start_time <= start_time, Show.end_time >= end_time).first()
+
+        if c1 or c2 or c3 or c4:
             flash('Show already exists at this time')
             return redirect(url_for('add_show', venue_id=venue_id))
         if form.ticket_price.data < 0:

@@ -22,6 +22,8 @@ import auth
 # Init routes
 import routes
 
+# Init api
+import api
 
 if __name__ == '__main__':
     app.run()
