@@ -29,7 +29,7 @@ def login():
             flash('Invalid username or password')
     elif request.method == 'POST':
         flash_form_errors(form)
-    return render_template('login.html', form=form)
+    return render_template('auth/login.html', form=form)
 
 @app.route('/logout')
 def logout():
@@ -58,7 +58,7 @@ def admin_register():
         return redirect(url_for('login'))
     elif request.method == 'POST':
         flash_form_errors(form)
-    return render_template('register.html', form=form, usertype='Admin')
+    return render_template('auth/register.html', form=form, usertype='Admin')
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -79,4 +79,4 @@ def register():
         return redirect(url_for('login'))
     elif request.method == 'POST':
         flash_form_errors(form)
-    return render_template('register.html', form=form, usertype='User')
+    return render_template('auth/register.html', form=form, usertype='User')

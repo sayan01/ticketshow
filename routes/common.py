@@ -12,7 +12,7 @@ from error import flash_form_errors
 @app.route('/profile')
 @login_required
 def profile():
-    return render_template('profile.html', user=current_user)
+    return render_template('profile/profile.html', user=current_user)
 
 
 @app.route('/profile/edit', methods=['GET', 'POST'])
@@ -30,7 +30,7 @@ def edit_profile():
         form.username.data = current_user.username
     elif request.method == 'POST':
         flash_form_errors(form)
-    return render_template('edit_profile.html', user=current_user, form=form)
+    return render_template('profile/edit_profile.html', user=current_user, form=form)
 
 
 @app.route('/profile/change_password', methods=['GET', 'POST'])
@@ -46,4 +46,4 @@ def change_password():
         pass
     elif request.method == 'POST':
         flash_form_errors(form)
-    return render_template('change_password.html', user=current_user, form=form)
+    return render_template('profile/change_password.html', user=current_user, form=form)
