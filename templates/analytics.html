@@ -1,0 +1,61 @@
+{% extends 'components/layout.html' %}
+
+{% block content %}
+    <div class="header d-flex flex-row align-items-center justify-content-between">
+        <h1>Analytics</h1>
+        <a href="{{url_for('export')}}" class="btn btn-outline-primary">
+            <i class="fas fa-file-export    "></i>
+            Export Data
+        </a>
+    </div>
+    <div class="charts d-flex flex-column">
+        <h2>Number of Shows per Venue:</h2>
+        <canvas id="venue-show" ></canvas>
+        <hr>
+        <h2>Number of Bookings per Venue:</h2>
+        <canvas id="venue-bookings" ></canvas>
+        <hr>
+        <h2>Number of Bookings per Show:</h2>
+        <canvas id="show-bookings" ></canvas>
+        <hr>
+        <h2>Number of Bookings per User:</h2>
+        <canvas id="user-bookings" ></canvas>
+    </div>
+{% endblock %}
+
+{% block style %}
+
+{% endblock %}
+
+{% block script %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const venue_show = document.getElementById('venue-show');
+  const venue_bookings = document.getElementById('venue-bookings');
+  const show_bookings = document.getElementById('show-bookings');
+  const user_bookings = document.getElementById('user-bookings');
+  const options = {
+    responsive: true
+  };
+  create_chart = (id, labels, data, label) => {
+    new Chart(id, {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: label,
+          data: data,
+          borderWidth: 1
+        }]
+      },
+      options
+    });
+  }
+  create_chart(venue_show, {{ venuenames|safe}}, {{ showspervenue | safe }}, 'Number of Shows per Venue');
+  create_chart(venue_bookings, {{ venuenames|safe}}, {{ bookingspervenue | safe }}, 'Number of Bookings per Venue');
+  create_chart(show_bookings, {{ shownames|safe}}, {{ bookingspershow | safe }}, 'Number of Bookings per Show');
+  create_chart(user_bookings, {{ usernames|safe}}, {{ bookingsperuser | safe }}, 'Number of Bookings per User');
+
+
+</script>
+{% endblock %}

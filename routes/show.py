@@ -145,6 +145,8 @@ def delete_show(show_id: int):
     form = ShowForm()
     form.venue.choices = [(show.venue.id, show.venue.name)]
     if form.validate_on_submit():
+        for booking in show.bookings:
+            db.session.delete(booking)
         db.session.delete(show)
         db.session.commit()
         flash('Show deleted successfully')

@@ -13,6 +13,7 @@
           {% if current_user.is_admin %}
             {{ nav_link('admin', 'Home') }}
             {{ nav_link('admin_register', 'Register') }}
+            {{ nav_link('analytics', 'Analytics') }}
           {% else %}
             {{ nav_link('index', 'Home') }}
             {{ nav_link('bookings', 'Bookings') }}

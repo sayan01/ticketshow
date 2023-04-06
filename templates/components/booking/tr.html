@@ -15,6 +15,10 @@
         {{ booking.seats }}
     </td>
     <td class="booking__actions">
-        <a href="{{ url_for('cancel_show', show_id=booking.show.id) }}" class="btn btn-danger">Cancel</a>
+        {% if booking.show.end_time > now %}
+            <a href="{{ url_for('cancel_show', show_id=booking.show.id) }}" class="btn btn-danger">Cancel</a>
+        {% else %}
+            <a href="{{ url_for('cancel_show', show_id=booking.show.id) }}" class="btn btn-danger disabled">Cancel</a>
+        {% endif %}
     </td>
 </tr>

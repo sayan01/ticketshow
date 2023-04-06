@@ -68,6 +68,9 @@ def book_show(show_id: int):
 def cancel_show(show_id: int):
     show = Show.query.get_or_404(show_id)
     booking = Booking.query.filter_by(user=current_user, show=show).first_or_404()
+    if booking.show.end_time < datetime.now():
+        flash('Cannot cancel booking for a show that has already ended')
+        return redirect(url_for('bookings'))
     if request.method == 'POST':
         db.session.delete(booking)
         db.session.commit()
@@ -78,4 +81,4 @@ def cancel_show(show_id: int):
 @app.route('/bookings')
 @login_required
 def bookings():
-    return render_template('bookings.html', user=current_user)
+    return render_template('bookings.html', user=current_user, now=datetime.now())

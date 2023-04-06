@@ -54,7 +54,10 @@ def delete_venue(venue_id: int):
     form = VenueForm()
     venue = Venue.query.get_or_404(venue_id)
     if request.method == 'POST':
-        [db.session.delete(show) for show in venue.shows]
+        for show in venue.shows:
+            for booking in show.bookings:
+                db.session.delete(booking)
+            db.session.delete(show)
         db.session.delete(venue)
         db.session.commit()
         flash('Venue deleted successfully')

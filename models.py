@@ -62,7 +62,7 @@ class Booking(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     show_id = db.Column(db.Integer, db.ForeignKey('show.id'), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    booking_time = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    booking_time = db.Column(db.DateTime, nullable=False, default=datetime.now)
     seats = db.Column(db.Integer, nullable=False)
 
 with app.app_context():

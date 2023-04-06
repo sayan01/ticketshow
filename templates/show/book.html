@@ -16,11 +16,6 @@
         </div>
         <hr>
         <p>
-            <strong>Price per ticket:</strong>
-            Rs.
-            <span id="price">{{show.price}}</span>
-        </p>
-        <p>
             <strong>Total Price:</strong>
             Rs.
             <span id="total">{{show.price}}</span>
@@ -39,9 +34,8 @@
     <script>
         const quantity = document.getElementById('quantity');
         const total = document.getElementById('total');
-        const price = document.getElementById('price');
         update = () => {
-            total.innerText = quantity.value * price.innerText;
+            total.innerText = quantity.value * {{show.price}};
         }
         quantity.addEventListener('change', update);
         quantity.addEventListener('keyup', update);
