@@ -6,7 +6,6 @@ csv
 ticketshow
 migrations
 instance
-*.pdf
 *.zip
 __pycache__
 .vscode
