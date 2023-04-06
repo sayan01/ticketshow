@@ -6,3 +6,4 @@ migrations
 instance
 *.pdf
 __pycache__
+.vscode
