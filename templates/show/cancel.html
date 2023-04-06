@@ -1,0 +1,19 @@
+{% extends 'components/layout.html' %}
+
+{% block title %}
+    Cancel Show - TicketShow
+{% endblock %}
+
+{% block content %}
+    <h1 class="display-1">Cancel Show</h1>
+    <hr>
+    {% include 'components/show/card.html'   %}
+    <form action="" method="POST">
+        <h2>Are you sure you want to cancel booking?</h2>
+        <h3>Ticket Details:</h3>
+        <p><strong>Number of Seats:</strong> {{booking.seats}}</p>
+        <input type="submit" class="btn btn-danger my-3" value="Cancel">
+        <a class="btn btn-outline-danger" href="{{url_for('index')}}">Go Back</a>
+    </form>
+
+{% endblock %}

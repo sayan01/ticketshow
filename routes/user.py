@@ -45,9 +45,15 @@ def book_show(show_id: int):
         if form.seats.data > show.venue.capacity - sum([booking.seats for booking in show.bookings]):
             flash('Not enough seats available')
             return redirect(url_for('book_show', show_id=show_id))
-        # create booking
-        booking = Booking( user=current_user, show=show, seats=form.seats.data)
-        db.session.add(booking)
+        # check if user has already booked
+        booking = Booking.query.filter_by(user=current_user, show=show).first()
+        if booking:
+            flash('You have already booked this show, adding seats to your booking')
+            booking.seats += form.seats.data
+        else:
+            # create booking
+            booking = Booking( user=current_user, show=show, seats=form.seats.data)
+            db.session.add(booking)
         db.session.commit()
         flash('Booking successful')
         return redirect(url_for('index'))
@@ -56,3 +62,15 @@ def book_show(show_id: int):
     elif request.method == 'POST':
         flash_form_errors(form)
     return render_template('show/book.html', form=form, show=show)
+
+@app.route('/show/<int:show_id>/cancel', methods=['GET', 'POST'])
+@login_required
+def cancel_show(show_id: int):
+    show = Show.query.get_or_404(show_id)
+    booking = Booking.query.filter_by(user=current_user, show=show).first_or_404()
+    if request.method == 'POST':
+        db.session.delete(booking)
+        db.session.commit()
+        flash('Booking cancelled')
+        return redirect(url_for('index'))
+    return render_template('show/cancel.html', show=show, booking=booking)
