@@ -5,34 +5,55 @@
 {% endblock %}
 
 {% block content %}
-    <h1 class="display-1">{{ usertype }} Register</h1>
-    <hr>
-    <!-- Register Form -->
-    <form action="" method="POST">
-        {{ form.hidden_tag() }}
-        <div class="input-group mb-3">
-            {{form.username.label(class="input-group-text")}}
-            {{ form.username(class="form-control") }}
+    <div class="register-container">
+        <div class="card">
+            <h1 class="display-1">{{ usertype }} Register</h1>
+            <hr>
+            <!-- Register Form -->
+            <form action="" method="POST">
+                {{ form.hidden_tag() }}
+                <div class="input-group mb-3">
+                    {{form.username.label(class="input-group-text")}}
+                    {{ form.username(class="form-control") }}
+                </div>
+                <div class="input-group mb-3">
+                    {{form.password.label(class="input-group-text")}}
+                    {{ form.password(class="form-control") }}
+                </div>
+                <div class="input-group mb-3">
+                    {{form.confirm_password.label(class="input-group-text")}}
+                    {{ form.confirm_password(class="form-control") }}
+                </div>
+                <div class="input-group mb-3">
+                    {{ form.name.label(class="input-group-text") }}
+                    {{ form.name(class="form-control") }}
+                </div>
+                <div class="center"><input type="submit" class="btn btn-primary" value="Register"></div>
+            </form>
         </div>
-
-        <div class="input-group mb-3">
-            {{form.password.label(class="input-group-text")}}
-            {{ form.password(class="form-control") }}
-        </div>
-
-        <div class="input-group mb-3">
-            {{form.confirm_password.label(class="input-group-text")}}
-            {{ form.confirm_password(class="form-control") }}
-        </div>
-
-        <div class="input-group mb-3">
-            {{ form.name.label(class="input-group-text") }}
-            {{ form.name(class="form-control") }}
-        </div>
-        <input type="submit" class="btn btn-primary" value="Register">
-    </form>
+    </div>
 
 {% endblock content %}
 
 {% block style %}
+<style>
+.register-container{
+    min-height: 80vh;
+    display: grid;
+    place-items: center;
+}
+.card{
+    width: clamp(300px, 70%, 700px);
+    padding: 10px 0;
+}
+h1{
+    text-align: center;
+}
+.center{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+</style>
 {% endblock %}

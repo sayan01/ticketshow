@@ -71,6 +71,24 @@ def register():
         if User.query.filter_by(username=form.username.data).first():
             flash('Username already exists')
             return redirect(url_for('register'))
+        # password should have 1 small, 1u upper case, 1 symbol, 1 number
+        haslower = False
+        hasUpper = False
+        hasNumber = False
+        hasSymbol = False
+        from string import ascii_lowercase, ascii_uppercase, digits
+        for char in form.password.data:
+            if char in ascii_uppercase:
+                hasUpper = True
+            if char in ascii_lowercase:
+                hasLower = True
+            if char in digits:
+                hasNumber = True
+            if char in "!@#$%^&*()_+{}:>?<\"":
+                hasSymbol = True
+        if not (haslower and hasUpper and hasNumber and hasSymbol):
+            flash("Password needs to contain atleast 1 uppercase, 1 lowercase, 1 number, and 1 symbol")
+            return redirect(url_for('register'))
         user = User(username=form.username.data, name=form.name.data)
         user.password = form.password.data
         db.session.add(user)
